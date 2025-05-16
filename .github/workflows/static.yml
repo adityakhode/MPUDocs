@@ -29,11 +29,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          
+      - name: Install dependencies
+        run: |
+          npm add -D vitepress
+          
+      - name: Build VitePress
+        run: npm run docs:build
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .vitepress/dist/
+          path: .vitepress/dist
           
       - name: Deploy to GitHub Pages
         id: deployment
