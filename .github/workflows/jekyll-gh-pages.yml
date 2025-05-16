@@ -28,10 +28,15 @@ jobs:
           node-version: 20
           
       - name: Install dependencies
-        run: npm install -D vitepress
-        
+        run: |
+          npm install
+          npm install -D vitepress
+          
       - name: Build VitePress
         run: npm run docs:build
+        
+      - name: Verify build output exists
+        run: ls -R docs/.vitepress/dist || echo "Build failed - no dist directory"
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
